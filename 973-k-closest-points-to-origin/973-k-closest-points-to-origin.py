@@ -4,7 +4,7 @@ class Solution:
         finalPoints = []
         
         for point in points:
-            distance = math.sqrt(math.pow(point[0],2)+math.pow(point[1],2))
+            distance = math.pow(point[0],2)+math.pow(point[1],2)
             closestPoints.append([distance, point[0],point[1]])
         heapq.heapify(closestPoints)
         for i in range(k):
