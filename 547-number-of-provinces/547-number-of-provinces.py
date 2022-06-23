@@ -1,44 +1,23 @@
 class Solution:
     def findCircleNum(self, grid: List[List[int]]) -> int:
         n=len(grid)   
-        parent=[i for i in range(n)]
-        rank=[1]*n
-       
-        def convert(a):
-            adjList = defaultdict(list)
-            for i in range(n):
-                for j in range(n):
-                               if a[i][j]== 1:
-                                   adjList[i].append(j)
-            return adjList
-     
-        
-        def find(n1):
-            parValue=n1
+        def dfs(i,visited,grid):
+            for j in range(n):
+                if grid[i][j] and j not in visited:
+                    visited.add(j)
+                    dfs(j,visited,grid)
             
-            while parValue!=parent[parValue]:
-                parValue=parent[parent[parValue]]
-                parValue=parent[parValue]
-                
-            return parValue
             
-        def union(n1,n2):
-            p1,p2=find(n1),find(n2)
-            if p1 == p2:
-                return 0
-            if rank[p1]>rank[p2]:
-                parent[p2]=p1
-                rank[p1]+=rank[p2]
-            else:
-                parent[p1]=p2
-                rank[p2]+=rank[p1]
-            return 1
+            
         
-        edges=convert(grid)
-        result=n
-        for n1 in edges:
-            for n2 in edges[n1]:
-                result-=union(n1,n2)
-        return result
- 
+        visited=set()
+        res=0
+        for i in range(n):
+            if i not in visited:
+                res+=1
+                visited.add(i)
+                dfs(i,visited,grid)
+        return res
+            
+  
        
