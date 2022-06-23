@@ -6,8 +6,8 @@ class Solution:
        
         def convert(a):
             adjList = defaultdict(list)
-            for i in range(len(a)):
-                for j in range(len(a[i])):
+            for i in range(n):
+                for j in range(n):
                                if a[i][j]== 1:
                                    adjList[i].append(j)
             return adjList
