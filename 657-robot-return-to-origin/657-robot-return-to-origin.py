@@ -4,11 +4,11 @@ class Solution:
         for c in moves:
             if c == 'U':
                 curry+=1
-            if c == 'R':
+            elif c == 'R':
                 currx+=1
-            if c == 'L':
+            elif c == 'L':
                 currx-=1
-            if c == 'D':
+            elif c == 'D':
                 curry-=1
         if currx==0 and curry==0:
             return True
