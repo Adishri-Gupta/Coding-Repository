@@ -14,7 +14,7 @@ class Solution:
             return
 
         for i in range(start, len(c)):
-            path.append(c[i])
-            self.helper(target-c[i],path,c,i)
-            path.pop()
+            # path.append(c[i])
+            self.helper(target-c[i],path+[c[i]],c,i)
+            # path.pop()
     
