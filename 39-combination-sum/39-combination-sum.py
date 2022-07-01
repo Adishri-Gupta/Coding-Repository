@@ -1,33 +1,21 @@
-class Solution(object):
-    def combinationSum(self, candidates, target):
-        """
-        :type candidates: List[int]
-        :type target: int
-        :rtype: List[List[int]]
-        """
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res=[]
+
         
-        solution = []
-        def helper(subset,index,total,target,array,solution):
-            
-            if index >= len(array):
-                if total == target:
-                    solution.append(subset[:])
-                    return
-                
-                return
-                    
-            if total > target:
-                return
-            
-            helper(subset,index+1,total,target,array,solution)
-            
+        def helper(target, path,c, start):
 
-            helper(subset+[array[index]],index,total+array[index],target,array,solution)
+            if target<0:
+                return
 
-            
-              
-            return 
+            if target==0:
+                res.append(list(path))
+                return
+
+            for i in range(start, len(c)):
+                path.append(c[i])
+                helper(target-c[i],path,c,i)
+                path.pop()
         
-
-        helper([],0,0,target,candidates,solution)
-        return solution
+        helper(target,[],candidates, 0)
+        return res
