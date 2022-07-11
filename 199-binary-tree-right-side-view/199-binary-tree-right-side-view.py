@@ -27,7 +27,7 @@ class Solution:
                     queue.append(currNode.left)
                 if currNode.right is not None:
                     queue.append(currNode.right)
-            ans.append(currList[-1])
+            ans.append(currNode.val)
         return ans
         
         
