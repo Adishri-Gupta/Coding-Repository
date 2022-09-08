@@ -2,20 +2,18 @@ class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
         res=set()
-        
         for i in range(len(nums)):
-            l = i+1
-            r = len(nums)-1
-            while(l<r):
-                sumVal=nums[i]+nums[l]+nums[r]
-                if sumVal==0:
-                    res.add((nums[i],nums[l],nums[r]))
-                    l+=1
-                    r-=1
-                    
-                elif sumVal<0:
-                    l+=1
+            j=i+1
+            k=len(nums)-1
+            while j<k:
+                sumVal=nums[j]+nums[k]+nums[i]
+                if sumVal<0:
+                    j+=1
+                elif sumVal>0:
+                    k-=1
                 else:
-                    r-=1
-
-        return res
+                    res.add((nums[i],nums[j],nums[k]))
+                    j+=1
+                    k-=1
+        return list(res)
+                    
