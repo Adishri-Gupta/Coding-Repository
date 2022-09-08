@@ -4,6 +4,6 @@ class Solution:
         for i in range(len(nums)):
             val=target-nums[i]
             if val in mapVal:
-                return [i,mapVal[val]]
+                return [mapVal[val],i]
             mapVal[nums[i]]=i
         return
