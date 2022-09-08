@@ -3,16 +3,12 @@ class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
         res=[]
-        x = set()
-        for i in range(len(nums)):
-            if nums[i] in x:
-                continue
-            else:
-                x.add(nums[i])
-            print(nums[i])
-                
+        
+        i = 0
+        while i<len(nums):                
             if nums[i]>0:
                 break
+                
             j=i+1
             k=len(nums)-1
             while j<k:
@@ -31,5 +27,8 @@ class Solution:
                     k-=1
                     while j<k and j+1<len(nums) and nums[j-1] == nums[j]:
                         j+=1
+            i+=1
+            while i<len(nums) and nums[i-1] == nums[i]:
+                i+=1
         return res
                     
