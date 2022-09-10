@@ -7,4 +7,5 @@ class Solution:
             
             for j in range(k):
                 costs[i][j]=min(costs[i-1][0:j]+costs[i-1][j+1:])+costs[i][j]
-        return min(costs[-1])
+                mat[j]=costs[i][j]
+        return min(mat)
