@@ -13,13 +13,10 @@ class WordDistance:
         lword2=self.valMap[word2]
         l1=0
         l2=0
-        while l1<len(lword1) and l2<len(lword2):
+        for i in lword1:
+            for j in lword2:
+                minS=min(abs(i-j),minS)
             
-            minS=min(abs(lword1[l1]-lword2[l2]),minS)
-            if lword1[l1]<lword2[l2]:
-                l1+=1
-            else:
-                l2+=1
         return minS
             
         
