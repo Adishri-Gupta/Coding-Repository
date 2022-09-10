@@ -4,8 +4,8 @@ class Solution:
         n=len(costs)
         mat = [costs[0][i] for i in range(k)]
         for i in range(1,n):
-            
+            newmat=mat.copy()
             for j in range(k):
-                costs[i][j]=min(costs[i-1][0:j]+costs[i-1][j+1:])+costs[i][j]
-                mat[j]=costs[i][j]
+                newmat[j] = min(mat[0:j] + mat[j+1:]) + costs[i][j]
+            mat=newmat
         return min(mat)
