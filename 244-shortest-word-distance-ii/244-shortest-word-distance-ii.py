@@ -20,6 +20,7 @@ class WordDistance:
         return minS
             
         
+        
 
 
 # Your WordDistance object will be instantiated and called as such:
