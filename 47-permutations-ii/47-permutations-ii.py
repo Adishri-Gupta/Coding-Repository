@@ -12,6 +12,7 @@ class Solution:
     
         if len(currComb)==n:
             self.res.append(list(currComb))
+            return
         for i in counter:
             if counter[i]>0:
                 counter[i]-=1
