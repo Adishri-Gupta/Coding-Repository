@@ -1,30 +1,25 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        parent=[i for i in range(n)]
-        rank=[1]*n
+        listEdges=defaultdict(list)
+        if len(edges)!=n - 1: 
+            return False
         
-        def find(n1):
-            parValue=n1
-            
-            while parValue!=parent[parValue]:
-                parValue=parent[parent[parValue]]
-                parValue=parent[parValue]
+        for edge in edges:
+            [i,j]=edge
+            listEdges[i].append(j)
+            listEdges[j].append(i)
+        
+        visited=set()
+        queue=deque([0])
+        visited.add(0)
+        while queue:
+            ele=queue.popleft()
+            for nei in listEdges[ele]:
+                if nei in visited:
+                    continue
+                visited.add(nei)
+                queue.append(nei)
+        return len(visited)==n
+    
+       
                 
-            return parValue
-            
-        def union(n1,n2):
-            p1,p2=find(n1),find(n2)
-            if p1 == p2:
-                return False
-            if rank[p1]>rank[p2]:
-                parent[p2]=p1
-                rank[p1]+=rank[p2]
-            else:
-                parent[p1]=p2
-                rank[p2]+=rank[p1]
-            return True
-        if len(edges) != n - 1: return False
-        for n1,n2 in edges:
-            if not union(n1,n2):
-                return False
-        return True
