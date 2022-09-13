@@ -1,22 +1,22 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        ans=[]
-       
+        self.res=[]
+        self.n = 2*n
+        self.helper('',[])
         
-        def helper(S=[],left=0,right=0):
-            if len(S)==2*n:
-                ans.append("".join(S))
-                return
-            if left<n:
-                S.append('(')
-                helper(S,left+1,right)
-                S.pop()
-            if right<left:
-                S.append(')')
-                helper(S,left,right+1)
-                S.pop()
-        helper()
-        return ans
-                
-
-    
+        return self.res
+    def helper(self, currComb,st):
+        
+        if len(currComb) == self.n:
+            if len(st)==0 :
+                self.res.append(currComb)
+            return
+       
+        st.append('(')
+        self.helper(currComb+'(',st)
+        st.pop()
+        
+        if st and st[-1]=='(':
+            st.pop()
+            self.helper(currComb+')',st)
+            st.append('(')
