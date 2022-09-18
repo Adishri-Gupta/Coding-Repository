@@ -7,24 +7,29 @@ import math
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        return self.helper(root)
-        
+        return self.minMax(root)[0]
     
-    def helper(self, node: TreeNode):
-        if not node:
-            return [math.inf, -1*math.inf]
+    def minMax(self,node):
+        if not node.left and not node.right:
+            return [True, node.val, node.val]
         
-        left = self.helper(node.left)
+        is_left_valid, is_right_valid = True, True
         
-        right = self.helper(node.right)
+        left_max, right_max = -math.inf, -math.inf
         
-        if not left or not right:
-            return False
+        left_min, right_min = math.inf, math.inf
         
-        if node.val <= left[1] or node.val >= right[0]:
-            return False
+        if node.left:
+            [is_left_valid, left_min, left_max]=self.minMax(node.left)
+        if node.right:
+            [is_right_valid, right_min, right_max]=self.minMax(node.right)
+
+        if not is_left_valid or not is_right_valid:
+            return [False, math.inf, -math.inf]
         
-        return [min(left[0], right[0], node.val), max(left[1], right[1], node.val)]
+        is_valid = left_max<node.val<right_min
         
-            
+        min_val = min(left_min, right_min, node.val)
+        max_val = max(left_max,right_max, node.val)
         
+        return [is_valid, min_val, max_val]
