@@ -5,13 +5,20 @@ class Solution:
             return nums[l]
         
         
-        while(l<r):
+        while(l<=r):
             m = (l+r)//2
             
-            if nums[m]<=nums[r]:
-                r=m
-            else:
+            if m-1>-1 and nums[m-1]>nums[m]:
+                return nums[m]
+            
+            if m+1<=r and nums[m]>nums[m+1]:
+                return nums[m+1]
+            
+            if nums[m]>nums[r]:
                 l=m+1
+            else:
+                r=m-1
+            
         
-        return nums[l]
+        return nums[0]
         
