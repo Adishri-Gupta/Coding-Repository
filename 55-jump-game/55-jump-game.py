@@ -3,10 +3,9 @@ class Solution:
         maxReach=0
         
         for i in range(len(nums)):
-            if i+nums[i]>maxReach:
-                maxReach=i+nums[i]
-            if i==maxReach:
-                break
+            if maxReach>=i:
+                maxReach=max(maxReach,i+nums[i])
+                
                 
     
         return maxReach>=len(nums)-1
