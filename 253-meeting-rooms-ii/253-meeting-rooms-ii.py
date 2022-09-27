@@ -1,22 +1,16 @@
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        meetingEnd = []
-        heapq.heapify(meetingEnd)
-        maxRooms=1
-        intervals.sort(key =  lambda x:x[0])
-        heapq.heappush(meetingEnd, intervals[0][1])
-        for i in range(1,len(intervals)):
+        maxEnd=max([v[1] for v in intervals])
         
-            if meetingEnd[0]>intervals[i][0]:
-                heapq.heappush(meetingEnd,intervals[i][1])
-          
-            else:
-                while meetingEnd and meetingEnd[0]<=intervals[i][0]:
-                    heapq.heappop(meetingEnd)
-                heapq.heappush(meetingEnd,intervals[i][1])
-            maxRooms = max(maxRooms, len(meetingEnd))
-                
-        return maxRooms
+        arr=[0]*(maxEnd+2)
+        arrSum=0
+        for start,end in intervals:
+            arr[start]+=1
+            arr[end]-=1
+            
+        for i in range(1, len(arr)):
+            arr[i]+=arr[i-1]
+        return max(arr)
             
     
         
