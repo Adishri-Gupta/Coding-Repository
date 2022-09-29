@@ -1,25 +1,16 @@
 class WordDistance:
 
     def __init__(self, wordsDict: List[str]):
+        
         self.valMap=defaultdict(list)
-        for i, w in enumerate(wordsDict):
-            self.valMap[w].append(i)
-
+        for i,words in enumerate(wordsDict):
+            self.valMap[words].append(i)
     def shortest(self, word1: str, word2: str) -> int:
-        
-        minS=math.inf
-        
-        lword1=self.valMap[word1]
-        lword2=self.valMap[word2]
-        l1=0
-        l2=0
-        for i in lword1:
-            for j in lword2:
-                minS=min(abs(i-j),minS)
-            
-        return minS
-            
-        
+        minD=math.inf
+        for i in self.valMap[word1]:
+            for j in self.valMap[word2]:
+                minD=min(minD,abs(j-i))
+        return minD
         
 
 
