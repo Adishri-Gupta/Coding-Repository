@@ -1,16 +1,14 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        bracket={')':'(','}':'{',']':'['}
+        mappings={')':'(',']':'[','}':'{'}
         st=[]
-        for sb in s:
-            
-            if sb in bracket:
-            
-               if st==[] or bracket[sb]!=st.pop():
-                    return False        
+        for c in s:
+            if c in mappings:
+                if st==[] or st.pop()!=mappings[c]:
+                    return False
+                   
             else:
-                st.append(sb)
+                st.append(c)
+        return True if st==[] else False
                 
-            
-            
-        return True if len(st)==0 else False
+        
