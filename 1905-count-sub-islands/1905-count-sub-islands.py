@@ -16,28 +16,29 @@ class Solution:
                     
         def bfs(i,j,grid,visited):
             q=deque()
+            
             q.append((i,j))
+            visited.add((i,j))
+            
+            
             island=[]
+            island.append((i,j))
+            
             directions=[[-1,0],[1,0],[0,-1],[0,1]]
+            
             while q:
-                x,y=q.popleft()
-                
-                if (x,y) in visited: continue
-                
-                visited.add((x,y))
-                
-                island.append((x,y))
-                
+                x,y=q.popleft()                    
+                    
                 for d in directions:
                     newx=x+d[0]
                     newy=y+d[1]
-                    if newx<0 or newy<0 or newx>=m or newy>=n or grid[newx][newy]!=1:
+                    if (newx,newy) in visited or newx<0 or newy<0 or newx>=m or newy>=n or grid[newx][newy]!=1:
                         continue
                     q.append((newx,newy))
-            
-            return island
-        
-        
+                    visited.add((newx,newy))
+                    island.append((newx,newy))
+    
+            return island    
         cnt = 0
         islands2=findIslands(grid2)
         
