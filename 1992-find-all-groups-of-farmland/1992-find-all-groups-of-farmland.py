@@ -4,13 +4,12 @@ class Solution:
         m=len(land)
         n=len(land[0])
         res=[]
-        @cache
+        cache = {}
+        
         def dfs(i,j,endi,endj):
             if i<0 or j<0 or i>=len(land) or j>=len(land[0]) or land[i][j]!=1:
                 return [endi,endj]
-            
-            endi=max(endi,i)
-            endj=max(endj,j)
+      
             
             land[i][j]=-1
             
@@ -19,8 +18,8 @@ class Solution:
             endiu, endju = dfs(i,j+1,endi,endj)
             endid, endjd = dfs(i,j-1,endi,endj)
             
-            endi = max(endir,endil,endiu,endid)
-            endj = max(endjr,endjl,endju,endjd)
+            endi = max(endir,endil,endiu,endid,i)
+            endj = max(endjr,endjl,endju,endjd,j)
             return [endi,endj]      
             
         for i in range(m):
