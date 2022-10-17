@@ -4,7 +4,7 @@ class Solution:
         m=len(land)
         n=len(land[0])
         res=[]
-   
+        @cache
         def dfs(i,j,endi,endj):
             if i<0 or j<0 or i>=len(land) or j>=len(land[0]) or land[i][j]!=1:
                 return [endi,endj]
