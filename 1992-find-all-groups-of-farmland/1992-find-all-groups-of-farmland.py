@@ -7,6 +7,10 @@ class Solution:
         cache = {}
         
         def dfs(i,j,endi,endj):
+            k = (i,j,endi,endj)
+            
+            if k in cache:
+                return cache[k]
             if i<0 or j<0 or i>=len(land) or j>=len(land[0]) or land[i][j]!=1:
                 return [endi,endj]
       
@@ -20,7 +24,9 @@ class Solution:
             
             endi = max(endir,endil,endiu,endid,i)
             endj = max(endjr,endjl,endju,endjd,j)
-            return [endi,endj]      
+            cache[k] = [endi,endj] 
+            
+            return cache[k]
             
         for i in range(m):
             for j in range(n):
