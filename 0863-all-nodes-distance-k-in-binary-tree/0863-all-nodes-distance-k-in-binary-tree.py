@@ -33,7 +33,6 @@ class Solution:
             ele,dist=q.popleft()
            
             if dist==k:
-                print(dist)
                 ans.append(ele)
             for nei in graph[ele]:
                 if nei in visited:
