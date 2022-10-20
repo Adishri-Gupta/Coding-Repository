@@ -17,8 +17,9 @@ class Solution:
             minr,maxr,isValidR=helper(node.right)
             
             isValidNode=isValidL and isValidR and maxl<node.val<minr
-            minNode=min(minl,minr,node.val)
-            maxNode=max(maxl,maxr,node.val)
+            minNode=min(minl, node.val)
+            maxNode=max(maxr, node.val)
+            
             return [minNode,maxNode,isValidNode]
         
         return True if helper(root)[2] else False
