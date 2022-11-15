@@ -8,23 +8,19 @@ import math
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         
-        
         def helper(node):
             if not node:
-                return [math.inf,-math.inf,True]
+                return [-math.inf,math.inf,True]
+            maxl,minl,isValidl=helper(node.left)
+            maxr,minr,isValidr=helper(node.right)
             
-            minl,maxl,isValidL=helper(node.left)
-            minr,maxr,isValidR=helper(node.right)
+            isValidNode=isValidl and isValidr and maxl<node.val<minr
+            maxVal=max(maxr,node.val)
+            minVal=min(minl,node.val)
             
-            isValidNode=isValidL and isValidR and maxl<node.val<minr
-            minNode=min(minl, node.val)
-            maxNode=max(maxr, node.val)
-            
-            return [minNode,maxNode,isValidNode]
+            return [maxVal,minVal,isValidNode]
         
         return True if helper(root)[2] else False
-        
-        
         
             
         
