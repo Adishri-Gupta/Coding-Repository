@@ -1,25 +1,28 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph=defaultdict(list)
-        indegree=defaultdict(int)
-        q=deque()
-        res=[]
+        mapR=defaultdict(list)
+        inDeg=defaultdict(int)
+        ans=[]
         for pre in prerequisites:
-            a=pre[0]
-            b=pre[1]
+            x=pre[0]
+            y=pre[1]
+       
+            mapR[y].append(x)
             
-            graph[b].append(a)
-            indegree[a]+=1
+            inDeg[x]+=1
+   
+    
+            
+        q=deque()
         for i in range(numCourses):
-            if indegree[i]==0:
+            if inDeg[i]==0:
                 q.append(i)
-        while q:
-            ele=q.popleft()
-            res.append(ele)
-            for value in graph[ele]:
-                indegree[value]-=1
-                if indegree[value]==0:
-                    q.append(value)
-        return True if len(res)==numCourses else False
             
-        
+        while q:
+            curr=q.popleft()
+            ans.append(curr)
+            for nei in mapR[curr]:
+                inDeg[nei]-=1
+                if inDeg[nei]==0:
+                    q.append(nei)
+        return len(ans)==numCourses
