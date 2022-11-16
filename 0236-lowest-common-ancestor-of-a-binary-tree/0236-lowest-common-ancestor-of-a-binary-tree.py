@@ -7,24 +7,20 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        res=None
+        self.res=None
+        
         def helper(node):
-            nonlocal res
             if not node:
                 return [False,False]
             lp,lq=helper(node.left)
-            
             rp,rq=helper(node.right)
             
             cp=node==p or lp or rp
             cq=node==q or lq or rq
-          
-            if cp and cq and not res:
-                res=node
+            
+            if cp and cq and not self.res:
+                self.res=node
+                
             return [cp,cq]
         helper(root)
-        return res
-            
-                
-            
-            
+        return self.res
